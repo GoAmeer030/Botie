@@ -1,7 +1,10 @@
-import "@/styles/globals.css";
+import "@/styles/global.css";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import Providers from "@/app/providers";
 import Navbar from "@/components/Navbar";
 
 export const fontSans = FontSans({
@@ -15,17 +18,22 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning={true}>
             <body
                 className={cn(
                     "min-h-screen bg-background font-sans antialiased",
                     fontSans.variable
                 )}
             >
-                <div className="flex justify-center bg-[rgba(255,255,255,0.1)] backdrop-blur-md">
+                <Providers
+                    themeProps={{
+                        attribute: "class",
+                        defaultTheme: "dark",
+                    }}
+                >
                     <Navbar />
-                </div>
-                {children}
+                    {children}
+                </Providers>
             </body>
         </html>
     );

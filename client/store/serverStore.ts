@@ -1,14 +1,17 @@
 import { create } from "zustand";
-import { ServerState } from "@/types/serverState";
+import { ServerState } from "@/types/serverType";
+import { BotState } from "@/types/botType";
 
 export const useServerStore = create<ServerState>((set) => ({
-    serverName: "",
     serverIP: "",
     serverPort: 0,
+    isBedrock: false,
     botState: [],
 
-    setServerName: (name: string) => set({ serverName: name }),
-    setServerIP: (ip: string) => set({ serverIP: ip }),
-    setServerPort: (port: number) => set({ serverPort: port }),
-    setBotState: (botState: any[]) => set({ botState: botState }),
+    setServerIP: (ip: string): void => set({ serverIP: ip }),
+    setServerPort: (port: number): void => set({ serverPort: port }),
+    setIsBedrock: (isBedrock: boolean): void => set({ isBedrock: isBedrock }),
+    setBotState: (botState: BotState[]): void => set({ botState: botState }),
+
+    reset: (): void => set({ serverIP: "", serverPort: 0, botState: [], isBedrock: false })
 }));

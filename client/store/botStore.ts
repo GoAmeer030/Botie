@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { BotState } from "@/types/botState";
+import { BotState } from "@/types/botType";
 
 export const useBotStore = create<BotState>((set) => ({
     botName: "",
